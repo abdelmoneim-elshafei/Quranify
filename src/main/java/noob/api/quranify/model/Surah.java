@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
-import org.springframework.lang.NonNull;
 
 import java.sql.Timestamp;
 
@@ -15,40 +14,31 @@ import java.sql.Timestamp;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table("ayahs")
-public class Ayah {
-
+@Table("surahs")
+public class Surah {
     @Id
-    private Long id;
+    private Integer id;
 
     @Column("number")
-    private int number;
+    private Integer number;
 
-    @Column("text")
-    private String text;
+    @Column("name_ar")
+    private String nameArabic;
 
-    @NonNull
-    @Column("number_in_surah")
-    private int numberInSurah;
+    @Column("name_en")
+    private String nameEnglish;
 
-    @Column("page")
-    private int page;
+    @Column("name_en_translation")
+    private String nameEnglishTranslation;
 
-    @Column("surah_id")
-    private int surahId;
-
-    @Column("hizb_id")
-    private int hizbId;
-
-    @Column("juz_id")
-    private int juzId;
-
-    @Column("sajda")
-    private boolean sajda;
+    @Column("type")
+    private String type;
 
     @Column("created_at")
     private Timestamp createdAt;
 
     @Column("updated_at")
     private Timestamp updatedAt;
+
+    // Constructors, getters, and setters
 }

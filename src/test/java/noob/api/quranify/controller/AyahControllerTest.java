@@ -54,8 +54,8 @@ public class AyahControllerTest {
 
     private AyahDTO createSampleAyah() {
         return AyahDTO.builder()
-                .id(1L)
-                .number(1)
+                //.id(1L)
+                //.number(1)
                 .text("Sample Ayah Text")
                 .numberInSurah(1)
                 .page(1)

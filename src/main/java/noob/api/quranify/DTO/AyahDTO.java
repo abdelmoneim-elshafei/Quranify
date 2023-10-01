@@ -17,9 +17,9 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 public class AyahDTO {
 
-    private Long id;
+    //private Long id;
 
-    private int number;
+    //private int number;
 
     private String text;
 
