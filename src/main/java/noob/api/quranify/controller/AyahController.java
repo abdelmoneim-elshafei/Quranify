@@ -21,7 +21,7 @@ public class AyahController {
     @GetMapping("/ayahs/{id}")
     public Mono<ResponseEntity<AyahDTO>> getAyahById(@PathVariable Long id) {
         return ayahService.getAyahById(id)
-                .map(ayah -> ResponseEntity.ok(ayah))
+                .map(ResponseEntity::ok)
                 .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
+
 import java.util.List;
 
 @RestController
@@ -27,17 +28,20 @@ public class SurahController {
     public Mono<ResponseEntity<?>> getSurahById(@PathVariable Integer id) {
         Mono<String> name = surahService.getSurahById(id).map(SurahDTO::getNameArabic);
         Mono<String> type = surahService.getSurahById(id).map(SurahDTO::getType);
+        Mono<Integer> numberOfAyahs = surahService.getCountAyahs(id);
         Mono<List<String>> ayahs = ayahService.getAyahsBySurahId(id).map(AyahDTO::getText).collectList();
-        return Mono.zip(name, type, ayahs)
+        return Mono.zip(name, type, numberOfAyahs, ayahs)
                 .map(tuple -> {
                     String r1 = tuple.getT1();
                     String r2 = tuple.getT2();
-                    List<String> r3 = tuple.getT3();
-                    return new SurahResponse(r1, r2, r3);
+                    Integer r3 = tuple.getT3();
+                    List<String> r4 = tuple.getT4();
+                    return new SurahResponse(r1, r2, r3, r4);
                 }).map(ResponseEntity::ok);
     }
+
     @GetMapping("/{id}/count")
-    public ResponseEntity<?> getCountOfAyahs(@PathVariable Integer id){
+    public ResponseEntity<?> getCountOfAyahs(@PathVariable Integer id) {
         return ResponseEntity.ok(surahService.getCountAyahs(id));
     }
 

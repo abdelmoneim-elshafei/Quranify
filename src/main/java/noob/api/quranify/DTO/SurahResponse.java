@@ -15,5 +15,6 @@ import java.util.List;
 public class SurahResponse {
     String surahName;
     String surahType;
+    Integer numberOfAyahs;
     List<String> surahBody;
 }
